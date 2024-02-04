@@ -1,6 +1,13 @@
 import { db } from "@/db";
 import Link from "next/link";
 
+// force dynamic
+// export const dynamic = "force-dynamic";
+// export const revalidate = 0;
+
+// caching
+// export const revalidate = 3; // 0 => disable
+
 export default async function HomePage() {
   const snippets = await db.snippet.findMany();
   const renderedSnippets = snippets.map(s => (

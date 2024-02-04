@@ -1,7 +1,6 @@
 "use client";
 import { useFormState } from "react-dom";
 import { createSnippet } from "@/actions";
-import { useState } from "react";
 
 const SnippetsCreatePage = () => {
   const [formState, action] = useFormState(createSnippet, { message: "" });

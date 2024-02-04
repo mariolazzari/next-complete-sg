@@ -8,7 +8,9 @@ type SnippetEditPageProps = {
   };
 };
 
-const SnippetEditPage = async ({ params }: SnippetEditPageProps) => {
+export default async function SnippetEditPage({
+  params,
+}: SnippetEditPageProps) {
   const id = +params.id;
   const snippet = await db.snippet.findFirst({
     where: {
@@ -21,6 +23,10 @@ const SnippetEditPage = async ({ params }: SnippetEditPageProps) => {
   }
 
   return <SnippetEditForm snippet={snippet} />;
-};
+}
 
-export default SnippetEditPage;
+export async function generateStaticParams() {
+  const snippets = await db.snippet.findMany();
+
+  return snippets.map(s => ({ id: s.id.toString() }));
+}

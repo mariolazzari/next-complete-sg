@@ -1,5 +1,6 @@
 "use server";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 import { db } from "@/db";
 
 type FormState = {
@@ -9,13 +10,12 @@ type FormState = {
 export const createSnippet = async (
   formState: FormState,
   formData: FormData
-) => {
+): Promise<FormState> => {
   try {
     const title = formData.get("title");
     if (typeof title !== "string" || title.length < 3) {
-      return {
-        message: "Title must be longer",
-      };
+      formState.message = "Title must be longer";
+      return formState;
     }
 
     const code = formData.get("code");
@@ -42,6 +42,7 @@ export const createSnippet = async (
     };
   }
 
+  revalidatePath("/");
   redirect("/");
 };
 
@@ -55,6 +56,7 @@ export const editSnippet = async (id: number, code: string) => {
     },
   });
 
+  revalidatePath(`/snippets/${id}`);
   redirect(`/snippets/${id}`);
 };
 
@@ -65,5 +67,6 @@ export const deleteSnippet = async (id: number) => {
     },
   });
 
+  revalidatePath("/");
   redirect("/");
 };
