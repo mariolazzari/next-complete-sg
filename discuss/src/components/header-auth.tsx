@@ -14,10 +14,6 @@ import * as actions from "@/actions";
 const HeaderAuth = () => {
   const session = useSession();
 
-  if (session.status === "loading") {
-    return null;
-  }
-
   const authContent: ReactNode = session.data?.user ? (
     <Popover placement="left">
       <PopoverTrigger>
@@ -51,7 +47,7 @@ const HeaderAuth = () => {
     </>
   );
 
-  return authContent;
+  return session.status === "loading" ? null : authContent;
 };
 
 export default HeaderAuth;
