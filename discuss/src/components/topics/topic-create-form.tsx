@@ -41,6 +41,12 @@ export const TopicCreateForm = () => {
             errorMessage={formState.errors.description?.join(", ")}
           />
 
+          {formState.errors._form && (
+            <div className="rounded bg-red-200 p-2 border border-red-400">
+              {formState.errors._form?.join(", ")}
+            </div>
+          )}
+
           <Button type="submit">Submit</Button>
         </form>
       </PopoverContent>
