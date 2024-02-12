@@ -1,5 +1,5 @@
-import { db } from "@/db";
 import { notFound } from "next/navigation";
+import { db } from "@/db";
 
 interface PostShowProps {
   postId: string;
@@ -7,9 +7,7 @@ interface PostShowProps {
 
 export default async function PostShow({ postId }: PostShowProps) {
   const post = await db.post.findFirst({
-    where: {
-      id: postId,
-    },
+    where: { id: postId },
   });
 
   if (!post) {

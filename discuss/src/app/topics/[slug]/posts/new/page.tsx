@@ -1,5 +1,3 @@
-const PostCreatePage = () => {
-  return <div>Post Create</div>;
-};
-
-export default PostCreatePage;
+export default function PostCreatePost() {
+  return <div>Post Create Pag</div>;
+}
