@@ -1,4 +1,5 @@
 "use server";
+
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { auth } from "@/auth";
@@ -45,7 +46,7 @@ export async function createComment(
     await db.comment.create({
       data: {
         content: result.data.content,
-        postId: postId || "",
+        postId: postId,
         parentId: parentId,
         userId: session.user.id || "",
       },
